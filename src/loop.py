@@ -20,9 +20,8 @@ def train_loop(train_dataloader, model, optimizer, scheduler, device, tqdm):
         loss = loss_fn(output, target)
         loss.backward()
 
-        if n_iter % N_ACCUMULATE == 0:
-            optimizer.step()
-            optimizer.zero_grad()
+        optimizer.step()
+        optimizer.zero_grad()
         scheduler.step()
 
         lrs.append(np.array([param_group["lr"] for param_group in optimizer.param_groups]).mean())
