@@ -6,7 +6,7 @@ import torch.nn as nn
 loss_fn = nn.BCEWithLogitsLoss()
 
 
-def train_loop(train_dataloader, model, optimizer, scheduler, device):
+def train_loop(train_dataloader, model, optimizer, scheduler, device, tqdm):
     losses, lrs = [], []
     model.train()
     optimizer.zero_grad()
@@ -29,7 +29,7 @@ def train_loop(train_dataloader, model, optimizer, scheduler, device):
         losses.append(loss.item())
     return lrs, losses
 
-def test_loop(test_dataloader, model, device):
+def test_loop(test_dataloader, model, device, tqdm):
     losses, predicts = [], []
     model.eval()
     for n_iter, d in tqdm(enumerate(test_dataloader), total=len(test_dataloader)):
