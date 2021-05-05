@@ -15,7 +15,7 @@ class WrimeDataset:
         input_ids = torch.tensor(tok["input_ids"])
         attention_mask = torch.tensor(tok["attention_mask"])
         token_type_ids = torch.tensor(tok["token_type_ids"])
-        target = torch.tensor([target]).float()
+        target = torch.tensor(target).float()
 
         return {
             "input_ids": input_ids,
