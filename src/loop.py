@@ -42,6 +42,6 @@ def test_loop(test_dataloader, model, device, tqdm):
 
         loss = loss_fn(output, target)
         losses.append(loss.item())
-        predicts += (output.sigmoid() > 0.5).int().cpu()
+        predicts.append(output.sigmoid().cpu().tolist())
 
     return predicts, np.array(losses).mean()

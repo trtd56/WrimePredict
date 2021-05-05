@@ -10,10 +10,12 @@ class WrimeBert(nn.Module):
         bert_conf.vocab_size = tokenizer.vocab_size
 
         self.bert = AutoModel.from_pretrained(model_type, config=bert_conf)
-        self.fc = nn.Linear(bert_conf.hidden_size, n_label)
+        self.fc1 = nn.Linear(bert_conf.hidden_size, bert_conf.hidden_size)
+        self.fc2 = nn.Linear(bert_conf.hidden_size, n_label)
 
 
     def forward(self, ids, mask, token_type_ids):
         _, h = self.bert(ids, attention_mask=mask, token_type_ids=token_type_ids)
-        h = self.fc(h)
+        h = self.fc1(h)
+        h = self.fc2(h)
         return h
