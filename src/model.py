@@ -16,6 +16,8 @@ class WrimeBert(nn.Module):
 
     def forward(self, ids, mask, token_type_ids):
         _, h = self.bert(ids, attention_mask=mask, token_type_ids=token_type_ids)
+        h = nn.ReLU()(h)
         h = self.fc1(h)
+        h = nn.ReLU()(h)
         h = self.fc2(h)
         return h
