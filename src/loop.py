@@ -26,7 +26,7 @@ def train_loop(train_dataloader, model, optimizer, scheduler, device, tqdm):
 
         lrs.append(np.array([param_group["lr"] for param_group in optimizer.param_groups]).mean())
         losses.append(loss.item())
-    return lrs, losses
+    return lrs, losses, model
 
 def test_loop(test_dataloader, model, device, tqdm):
     losses, predicts = [], []
